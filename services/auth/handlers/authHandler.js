@@ -20,6 +20,8 @@ exports.signup = async (req, res) => {
 
 exports.login = async (req, res) => {
   try {
+    const { email, password } = req.body;
+
     // 1) Proveruvrame dali ima vneseno email i password
     if (!email || !password) {
       return res.status(400).send('Please provide email and password');
@@ -46,6 +48,6 @@ exports.login = async (req, res) => {
     // 5) pustame response
     res.status(201).json({ status: 'success', token });
   } catch (err) {
-    res.status(500).send('Server problem');
+    res.status(500).send({ message: err.message });
   }
 };
