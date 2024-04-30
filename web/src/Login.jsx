@@ -25,9 +25,12 @@ function Login() {
   const login = async () => {
     try {
       console.log(data);
-      let res = await fetch(`http://127.0.0.1:6002/api/v1/auth/login`, {
+      let res = await fetch('http://127.0.0.1:6002/api/v1/auth/login', {
         method: 'POST',
         body: JSON.stringify(data),
+        headers: {
+          'Content-type': 'application/json',
+        },
       });
       console.log(res);
       let pretvorenJsonBoOBjet = await res.json();
