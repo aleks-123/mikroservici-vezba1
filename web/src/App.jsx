@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import Login from './Login';
 import Register from './Register';
 
@@ -9,11 +8,13 @@ function App() {
   const locationChange = (e) => {
     setLocation(e.target.dataset.target);
   };
+
   return (
-    <div>
+    <div className='App'>
+      <h1>Hello from the web</h1>
       <nav>
         <button onClick={locationChange} data-target='login'>
-          Login
+          Log in
         </button>
         <button onClick={locationChange} data-target='register'>
           Register

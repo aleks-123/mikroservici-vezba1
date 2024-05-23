@@ -9,7 +9,6 @@ db.init();
 app.use(express.json());
 app.use(cors());
 
-//ruti
 app.post('/api/v1/auth/create-account', auth.signup);
 app.post('/api/v1/auth/login', auth.login);
 

@@ -1,6 +1,4 @@
-//* npm install mongoose
 const mongoose = require('mongoose');
-//* npm install dotenv
 const dotenv = require('dotenv');
 
 dotenv.config({ path: `${__dirname}/../config/config.env` });
@@ -13,8 +11,8 @@ const DB = process.env.DATABASE.replace(
 exports.init = async () => {
   try {
     await mongoose.connect(DB);
-    console.log('Successfully connected to database');
+    console.log('Succesfully connected to database');
   } catch (err) {
-    console.log(err.message);
+    console.log(err);
   }
 };
