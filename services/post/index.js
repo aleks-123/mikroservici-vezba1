@@ -11,13 +11,17 @@ db.init();
 
 app.use(express.json());
 app.use(cors());
-//modul za protektiranje ruti
-// app.use(
-//   jwt.expressjwt({
-//     algorithms: ['HS256'],
-//     secret: process.env.JWT_SECRET,
-//   })
-// );
+// modul za protektiranje ruti
+app.use(
+  jwt
+    .expressjwt({
+      algorithms: ['HS256'],
+      secret: process.env.JWT_SECRET,
+    })
+    .unless({
+      path: ['/api/v1/create-account', '/api/v1/login'],
+    })
+);
 
 //routes
 app.get('/api/v1/posts', post.getAll);
