@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 function Login() {
-  //1. Kje kreirame inicijalen objekt
+  //1. Kje kreirame inicijalen objekt 123123123
   const initData = {
     email: '',
     password: '',
