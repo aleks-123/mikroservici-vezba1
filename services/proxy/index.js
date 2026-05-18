@@ -6,18 +6,23 @@ const cors = require("cors");
 const app = express();
 app.use(cors());
 
-app.get("/health", (req, res) => {
-  res.status(200).send("OK");
-});
+app.use(
+  "/api/v1/auth",
+  proxy("http://localhost:9000", {
+    proxyReqPathResolver: (req) => req.originalUrl,
+  }),
+);
 
-app.use("/api/v1/auth", proxy("http://localhost:9000"));
-app.use("/api/v1/posts", proxy("http://localhost:9001"));
+app.use(
+  "/api/v1/posts",
+  proxy("http://localhost:9001", {
+    proxyReqPathResolver: (req) => req.originalUrl,
+  }),
+);
 
-const PORT = process.env.PORT || 9002;
-
-app.listen(PORT, (err) => {
+app.listen(9002, (err) => {
   if (err) {
     return console.log(err);
   }
-  console.log(`Proxy service started on port ${PORT}`);
+  console.log(`Proxy service started on port 9002`);
 });
