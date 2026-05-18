@@ -13,9 +13,6 @@ app.get("/health", (req, res) => {
 app.use("/api/v1/auth", proxy("http://localhost:9000"));
 app.use("/api/v1/posts", proxy("http://localhost:9001"));
 
-app.use("/api/v1/auth", authProxy);
-app.use("/api/v1/posts", postProxy);
-
 const PORT = process.env.PORT || 9002;
 
 app.listen(PORT, (err) => {
