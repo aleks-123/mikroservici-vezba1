@@ -6,17 +6,8 @@ const cors = require("cors");
 const app = express();
 app.use(cors());
 
-const authProxy = proxy("http://localhost:9000", {
-  proxyReqPathResolver: (req) => {
-    return `/api/v1/auth${req.url}`;
-  },
-});
-
-const postProxy = proxy("http://localhost:9001", {
-  proxyReqPathResolver: (req) => {
-    return `/api/v1/posts${req.url}`;
-  },
-});
+app.use("/api/v1/auth", proxy("http://localhost:9000"));
+app.use("/api/v1/posts", proxy("http://localhost:9001"));
 
 app.use("/api/v1/auth", authProxy);
 app.use("/api/v1/posts", postProxy);
@@ -27,5 +18,5 @@ app.listen(PORT, (err) => {
   if (err) {
     return console.log(err);
   }
-  console.log("Proxy service started on port");
+  console.log(`Proxy service started on port ${PORT}`);
 });
