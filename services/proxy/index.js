@@ -18,8 +18,8 @@ const postProxy = proxy("http://localhost:9001", {
   },
 });
 
-app.use("/api/v1/auth", authProxy);
-app.use("/api/v1/posts", postProxy);
+app.use("/api/v1/auth/", authProxy);
+app.use("/api/v1/posts/", postProxy);
 
 app.listen(9002, (err) => {
   if (err) {
