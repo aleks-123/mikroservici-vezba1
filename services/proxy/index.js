@@ -6,6 +6,10 @@ const cors = require("cors");
 const app = express();
 app.use(cors());
 
+app.get("/health", (req, res) => {
+  res.status(200).send("OK");
+});
+
 app.use("/api/v1/auth", proxy("http://localhost:9000"));
 app.use("/api/v1/posts", proxy("http://localhost:9001"));
 
