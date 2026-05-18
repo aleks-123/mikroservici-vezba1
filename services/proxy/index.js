@@ -9,20 +9,6 @@ app.get("/health", (req, res) => {
   res.status(200).send("OK");
 });
 
-app.use(
-  "/api/v1/auth",
-  proxy("http://localhost:9000", {
-    proxyReqPathResolver: (req) => req.originalUrl,
-  }),
-);
-
-app.use(
-  "/api/v1/posts",
-  proxy("http://localhost:9001", {
-    proxyReqPathResolver: (req) => req.originalUrl,
-  }),
-);
-
 const PORT = 9002;
 app.listen(PORT, (err) => {
   if (err) {
