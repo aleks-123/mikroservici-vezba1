@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import ProtectedRoute from './ProtectedRoute';
+import React, { useEffect, useState } from "react";
+import ProtectedRoute from "./ProtectedRoute";
 
 function Login() {
   //1. Kje kreirame inicjalen objekt
   const initData = {
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   };
+
+  const vrednost = 10;
 
   //2. Kje gi zacuvame podatocite sto kje gi ispratime na nasheto api vo jusstejt
   const [data, setData] = useState(initData);
@@ -25,19 +27,19 @@ function Login() {
   //5. Imame funkcija login koja e normalno e asihrona
   const login = async () => {
     try {
-      let res = await fetch('http://127.0.0.1:9002/api/v1/auth/login', {
-        method: 'POST',
+      let res = await fetch("http://127.0.0.1:9002/api/v1/auth/login", {
+        method: "POST",
         body: JSON.stringify(data),
         headers: {
-          'Content-type': 'application/json',
+          "Content-type": "application/json",
         },
       });
 
       let pretvorenJsonVoObjekt = await res.json();
       if (res.ok) {
         setLoggedIn(true);
-        localStorage.setItem('loggedIn', 'true');
-        localStorage.setItem('token', pretvorenJsonVoObjekt.token);
+        localStorage.setItem("loggedIn", "true");
+        localStorage.setItem("token", pretvorenJsonVoObjekt.token);
       }
 
       alert(pretvorenJsonVoObjekt.status);
@@ -47,14 +49,14 @@ function Login() {
   };
 
   useEffect(() => {
-    const isLoggedIn = localStorage.getItem('loggedIn') === 'true';
+    const isLoggedIn = localStorage.getItem("loggedIn") === "true";
     setLoggedIn(isLoggedIn);
   }, []);
 
   const logout = () => {
     setLoggedIn(false);
-    localStorage.setItem('loggedIn', 'false');
-    localStorage.removeItem('token');
+    localStorage.setItem("loggedIn", "false");
+    localStorage.removeItem("token");
   };
 
   return (
@@ -69,21 +71,11 @@ function Login() {
           <h2>Login Form</h2>
           <label>Email</label>
           <br />
-          <input
-            type='email'
-            name='email'
-            value={data.email}
-            onChange={dataChange}
-          />
+          <input type="email" name="email" value={data.email} onChange={dataChange} />
           <br />
           <label>Passwords</label>
           <br />
-          <input
-            type='password'
-            name='password'
-            value={data.password}
-            onChange={dataChange}
-          />
+          <input type="password" name="password" value={data.password} onChange={dataChange} />
           <br />
           <button onClick={login}>Login</button>
         </div>

@@ -1,28 +1,29 @@
-const express = require('express');
+const express = require("express");
 //! npm install express-http-proxy
-const proxy = require('express-http-proxy');
-const cors = require('cors');
+const proxy = require("express-http-proxy");
+const cors = require("cors");
 
 const app = express();
 app.use(cors());
 
-const authProxy = proxy('http://localhost:9000', {
+const authProxy = proxy("http://localhost:10010", {
   proxyReqPathResolver: (req) => {
     return `/api/v1/auth${req.url}`;
   },
 });
-const postProxy = proxy('http://localhost:9001', {
+
+const postProxy = proxy("http://localhost:10020", {
   proxyReqPathResolver: (req) => {
     return `/api/v1/posts${req.url}`;
   },
 });
 
-app.use('/api/v1/auth/', authProxy);
-app.use('/api/v1/posts/', postProxy);
+app.use("/api/v1/auth/", authProxy);
+app.use("/api/v1/posts/", postProxy);
 
-app.listen(9002, (err) => {
+app.listen(10030, (err) => {
   if (err) {
     return console.log(err);
   }
-  console.log('Proxy service started on port 9002');
+  console.log("Proxy service started on port 10030");
 });

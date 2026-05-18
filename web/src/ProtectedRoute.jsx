@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 function ProtectedRoute() {
   const [posts, setPosts] = useState([]);
 
   const fetchPost = async () => {
     try {
-      const res = await fetch(`http://127.0.0.1:9002/api/v1/posts`, {
+      const res = await fetch(`http://127.0.0.1:1001/api/v1/posts`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
       const data = await res.json();
       if (res.ok) {
         setPosts(data.data.posts);
       } else {
-        console.log('Error', data.message);
+        console.log("Error", data.message);
       }
     } catch (err) {
       console.log(err);
