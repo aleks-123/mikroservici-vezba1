@@ -1,10 +1,13 @@
 const express = require("express");
-//! npm install express-http-proxy
 const proxy = require("express-http-proxy");
 const cors = require("cors");
 
 const app = express();
 app.use(cors());
+
+app.get("/health", (req, res) => {
+  res.status(200).send("OK");
+});
 
 app.use(
   "/api/v1/auth",
@@ -20,9 +23,10 @@ app.use(
   }),
 );
 
-app.listen(9002, (err) => {
+const PORT = 9002;
+app.listen(PORT, (err) => {
   if (err) {
     return console.log(err);
   }
-  console.log(`Proxy service started on port 9002`);
+  console.log(`Proxy service started on port ${PORT}`);
 });
