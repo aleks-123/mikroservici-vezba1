@@ -18,12 +18,14 @@ const postProxy = proxy("http://localhost:9001", {
   },
 });
 
-app.use("/api/v1/auth/", authProxy);
-app.use("/api/v1/posts/", postProxy);
+app.use("/api/v1/auth", authProxy);
+app.use("/api/v1/posts", postProxy);
 
-app.listen(9002, (err) => {
+const PORT = process.env.PORT || 9002;
+
+app.listen(PORT, (err) => {
   if (err) {
     return console.log(err);
   }
-  console.log("Proxy service started on port 10030");
+  console.log("Proxy service started on port");
 });
